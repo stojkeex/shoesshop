@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestige Pieces - Premium Replica Fashion</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom font and base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Pure black background */
+            color: #E5E7EB; /* Light text */
+        }
+        /* Smooth transition for all elements */
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+        /* Gradient text style */
+        .gradient-text {
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Gradient button style */
+        .gradient-button {
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            transition: all 0.3s ease;
+        }
+        .gradient-button:hover {
+            box-shadow: 0 0 20px #EC4899, 0 0 10px #3B82F6;
+        }
+        /* Active navigation link style */
+        .nav-link.active {
+            color: #EC4899;
+            font-weight: 600;
+        }
+        /* Custom shadow for cards */
+        .card-shadow:hover {
+             box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
+        }
+        /* Styles for product detail modal animation */
+        #product-detail-modal.open .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        /* Category button style */
+        .category-filter-btn.active {
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            color: white;
+            border-color: transparent;
+        }
+        /* FAQ Accordion styles */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary .faq-arrow {
+            transform: rotate(180deg);
+        }
+        /* Glowing price animation */
+        @keyframes glowing-price-animation {
+            0% { text-shadow: 0 0 5px #3B82F6, 0 0 10px #3B82F6; }
+            50% { text-shadow: 0 0 8px #EC4899, 0 0 15px #EC4899; }
+            100% { text-shadow: 0 0 5px #3B82F6, 0 0 10px #3B82F6; }
+        }
+        .glowing-price {
+            animation: glowing-price-animation 4s ease-in-out infinite;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-black/80 backdrop-blur-sm shadow-lg shadow-pink-500/10 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="#" onclick="showPage('home')" class="text-xl sm:text-2xl font-bold tracking-wider gradient-text">PRESTIGE PIECES</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
+                <a href="#" onclick="showPage('home')" class="nav-link text-gray-300 hover:text-pink-400 transition-all active">Home</a>
+                <a href="#" onclick="showPage('shop')" class="nav-link text-gray-300 hover:text-pink-400 transition-all">Shop</a>
+                <a href="#" onclick="showPage('about')" class="nav-link text-gray-300 hover:text-pink-400 transition-all">About</a>
+                <a href="#" onclick="showPage('contact')" class="nav-link text-gray-300 hover:text-pink-400 transition-all">Contact</a>
+            </div>
+
+            <!-- Icons & Mobile Menu Button -->
+            <!-- Responsive adjustment: space-x-2 for smaller screens, sm:space-x-4 for larger -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                 <!-- Currency Selector -->
+                <div class="relative">
+                    <select id="currency-selector" class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2 text-xs sm:text-sm">
+                        <option value="EUR">€ EUR</option>
+                        <option value="USD">$ USD</option>
+                    </select>
+                </div>
+                <button id="cart-button" class="relative text-gray-300 hover:text-pink-400 transition-all">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-pink-400">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black px-4 sm:px-6 pb-4">
+            <a href="#" onclick="showPage('home'); closeMobileMenu();" class="block py-2 text-gray-300 hover:text-pink-400">Home</a>
+            <a href="#" onclick="showPage('shop'); closeMobileMenu();" class="block py-2 text-gray-300 hover:text-pink-400">Shop</a>
+            <a href="#" onclick="showPage('about'); closeMobileMenu();" class="block py-2 text-gray-300 hover:text-pink-400">About</a>
+            <a href="#" onclick="showPage('contact'); closeMobileMenu();" class="block py-2 text-gray-300 hover:text-pink-400">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Content -->
+        <div id="page-content">
+            <!-- Home Page -->
+            <div id="home-page" class="page">
+                <section class="bg-black text-white">
+                    <div class="container mx-auto px-4 sm:px-6 py-20 sm:py-24 text-center">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Perfection in <span class="gradient-text">Every Detail</span>.</h1>
+                        <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Discover our exclusive collection of 1:1 replicas, where quality meets accessibility.</p>
+                        <a href="#" onclick="showPage('shop')" class="gradient-button text-white font-bold py-3 px-8 rounded-full text-lg inline-block">Browse Collection</a>
+                    </div>
+                </section>
+                <section class="py-16 bg-gray-900/50">
+                    <div class="container mx-auto px-4 sm:px-6">
+                        <!-- Responsive adjustment: grid-cols-1 for mobile, md:grid-cols-3 for larger screens -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                             <div class="flex flex-col items-center">
+                                <div class="bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-full p-4 mb-4">
+                                    <i data-lucide="gem"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">1:1 Quality</h3>
+                                <p class="text-gray-400">Our products are crafted to perfection, using the same materials as the originals.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-full p-4 mb-4">
+                                    <i data-lucide="box"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Original Packaging</h3>
+                                <p class="text-gray-400">Each item arrives in its original box, complete with all accessories and documentation.</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="bg-gradient-to-r from-blue-500 to-pink-500 text-white rounded-full p-4 mb-4">
+                                    <i data-lucide="shield-check"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Certificate of Authenticity</h3>
+                                <p class="text-gray-400">An included certificate confirms the premium quality and attention to detail.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- New Apparel Section -->
+                <section class="py-16">
+                    <div class="container mx-auto px-4 sm:px-6">
+                        <h2 class="text-3xl font-bold text-center mb-12">Latest <span class="gradient-text">Apparel</span></h2>
+                        <!-- Responsive adjustment: grid-cols-2 up to 5 columns based on screen size -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                            <!-- Small Card 1 -->
+                            <div class="group relative overflow-hidden rounded-lg cursor-pointer" onclick="openProductModal(5)">
+                                <img src="https://placehold.co/400x500/10B981/ffffff?text=T-Shirt" alt="Apparel 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-2 sm:p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                                    <h4 class="text-white font-semibold text-base sm:text-lg">Urban Tee</h4>
+                                    <p class="text-gray-300 glowing-price text-sm sm:text-base" data-currency-price="89.99">€89.99</p>
+                                </div>
+                            </div>
+                             <!-- Small Card 2 -->
+                            <div class="group relative overflow-hidden rounded-lg cursor-pointer" onclick="openProductModal(6)">
+                                <img src="https://placehold.co/400x500/F59E0B/ffffff?text=Sweater" alt="Apparel 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-2 sm:p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                                    <h4 class="text-white font-semibold text-base sm:text-lg">Knit Sweater</h4>
+                                    <p class="text-gray-300 glowing-price text-sm sm:text-base" data-currency-price="149.99">€149.99</p>
+                                </div>
+                            </div>
+                             <!-- Small Card 3 -->
+                            <div class="group relative overflow-hidden rounded-lg cursor-pointer" onclick="openProductModal(7)">
+                                <img src="https://placehold.co/400x500/6366F1/ffffff?text=Jacket" alt="Apparel 3" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-2 sm:p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                                    <h4 class="text-white font-semibold text-base sm:text-lg">Bomber Jacket</h4>
+                                    <p class="text-gray-300 glowing-price text-sm sm:text-base" data-currency-price="219.99">€219.99</p>
+                                </div>
+                            </div>
+                             <!-- Small Card 4 -->
+                            <div class="group relative overflow-hidden rounded-lg cursor-pointer" onclick="openProductModal(8)">
+                                <img src="https://placehold.co/400x500/D946EF/ffffff?text=Jeans" alt="Apparel 4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-2 sm:p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                                    <h4 class="text-white font-semibold text-base sm:text-lg">Slim Fit Jeans</h4>
+                                    <p class="text-gray-300 glowing-price text-sm sm:text-base" data-currency-price="169.99">€169.99</p>
+                                </div>
+                            </div>
+                             <!-- Small Card 5 -->
+                            <div class="group relative overflow-hidden rounded-lg cursor-pointer" onclick="openProductModal(9)">
+                                <img src="https://placehold.co/400x500/84CC16/ffffff?text=Polo" alt="Apparel 5" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-2 sm:p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                                    <h4 class="text-white font-semibold text-base sm:text-lg">Classic Polo</h4>
+                                    <p class="text-gray-300 glowing-price text-sm sm:text-base" data-currency-price="99.99">€99.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Shop Page -->
+            <div id="shop-page" class="page hidden">
+                <section class="py-16">
+                    <div class="container mx-auto px-4 sm:px-6">
+                        <h2 class="text-3xl font-bold text-center mb-8">All <span class="gradient-text">Products</span></h2>
+                        
+                        <!-- Horizontal Filters -->
+                        <!-- Responsive adjustment: flex-col for mobile, md:flex-row for larger screens -->
+                        <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800 mb-8 flex flex-col md:flex-row items-center gap-4">
+                            <!-- Search -->
+                            <div class="relative w-full md:w-auto md:flex-1">
+                                <input type="text" id="search-input" placeholder="Search products..." class="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 pl-10 text-white focus:outline-none focus:ring-1 focus:ring-pink-500 focus:border-pink-500">
+                                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                            </div>
+                             <!-- AI Stylist Button -->
+                            <button id="ai-stylist-button" class="gradient-button text-white font-semibold py-2 px-4 rounded-md flex items-center gap-2 w-full md:w-auto justify-center">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                                <span>AI Fashion Stylist</span>
+                            </button>
+                            <!-- Categories -->
+                            <div id="category-filters" class="flex-grow flex flex-wrap items-center justify-center md:justify-end gap-2">
+                                <!-- Category buttons injected here -->
+                            </div>
+                        </div>
+
+                        <!-- AI Results Banner -->
+                        <div id="ai-results-banner" class="hidden bg-blue-900/50 text-center p-3 text-sm rounded-lg border border-blue-700 mb-8">
+                            <span id="ai-results-text"></span>
+                            <button id="clear-ai-results" class="font-bold text-pink-400 hover:underline ml-2">Clear Results</button>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <!-- Responsive adjustment: grid-cols-1 up to 4 columns based on screen size -->
+                        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                            <!-- Products will be injected here -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- About Page -->
+            <div id="about-page" class="page hidden">
+                <section class="py-16">
+                    <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
+                        <h2 class="text-3xl font-bold text-center mb-8">About <span class="gradient-text">Prestige Pieces</span></h2>
+                        <p class="text-lg text-gray-400 mb-6 text-center">We believe luxury should be accessible. Our mission is to provide fashion enthusiasts with high-quality, indistinguishable replicas of their favorite designer pieces without the exorbitant price tag.</p>
+                        <div class="bg-gray-900/50 p-8 rounded-lg border border-gray-800">
+                            <h3 class="text-2xl font-semibold mb-4 text-pink-400">Our Commitment to Quality</h3>
+                            <p class="text-gray-300">Each item in our collection is meticulously sourced and inspected by our team of experts. We focus on replicating every detail, from the stitching and materials to the weight and feel of the original product. We are so confident in our quality that we back every purchase with a satisfaction guarantee.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Contact Page -->
+            <div id="contact-page" class="page hidden">
+                 <section class="py-16">
+                    <div class="container mx-auto px-4 sm:px-6 max-w-2xl">
+                        <h2 class="text-3xl font-bold text-center mb-8">Get In <span class="gradient-text">Touch</span></h2>
+                        <p class="text-lg text-gray-400 mb-10 text-center">Have a question or a special request? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</p>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
+                                <input type="text" id="name" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                                <input type="email" id="email" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
+                                <textarea id="message" rows="4" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full gradient-button text-white font-bold py-3 px-4 rounded-md">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 py-8">
+            <div class="text-center text-gray-500">
+                <p>&copy; 2024 Prestige Pieces. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex justify-end">
+        <div class="bg-black w-full max-w-md h-full shadow-lg transform transition-transform translate-x-full border-l border-gray-800">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-between items-center p-6 border-b border-gray-700">
+                    <h2 class="text-2xl font-bold">Your Cart</h2>
+                    <button id="close-cart-button" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-8 h-8"></i></button>
+                </div>
+                <div id="cart-items" class="flex-grow p-6 overflow-y-auto">
+                     <p class="text-gray-500 text-center">Your cart is empty.</p>
+                </div>
+                <div class="p-6 border-t border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-lg font-medium">Total:</span>
+                        <span id="cart-total" class="text-2xl font-bold glowing-price" data-currency-price="0">€0.00</span>
+                    </div>
+                    <button class="w-full gradient-button text-white py-3 rounded-lg font-bold">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product Detail Modal -->
+    <div id="product-detail-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="modal-content bg-gray-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Content will be injected by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-300 z-[70]">
+        Item added to cart!
+    </div>
+
+    <!-- Support Button -->
+    <button id="support-button" class="fixed top-1/2 -translate-y-1/2 right-0 bg-gradient-to-r from-blue-500 to-pink-500 text-white py-3 px-4 rounded-l-lg shadow-lg z-40 hover:pr-6 transition-all">
+        <i data-lucide="help-circle" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Support Modal -->
+    <div id="support-modal" class="fixed inset-0 bg-black/95 backdrop-blur-sm hidden z-[100] p-6 sm:p-12 transition-opacity duration-300 opacity-0">
+        <button id="close-support-modal" class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        
+        <div class="container mx-auto h-full overflow-y-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12"><span class="gradient-text">Support Center</span></h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Left Column: FAQ & Admins -->
+                <div class="text-left">
+                    <!-- FAQ Section -->
+                    <h3 class="text-2xl font-semibold mb-6 text-pink-400">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <details class="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+                            <summary class="font-semibold cursor-pointer flex justify-between items-center">
+                                <span>What is 1:1 quality?</span>
+                                <i data-lucide="chevron-down" class="faq-arrow transition-transform"></i>
+                            </summary>
+                            <p class="mt-4 text-gray-400">1:1 quality means our products are manufactured with the same materials, design, and attention to detail as the original luxury items, making them virtually indistinguishable.</p>
+                        </details>
+                        <details class="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+                            <summary class="font-semibold cursor-pointer flex justify-between items-center">
+                                <span>How long does shipping take?</span>
+                                <i data-lucide="chevron-down" class="faq-arrow transition-transform"></i>
+                            </summary>
+                            <p class="mt-4 text-gray-400">Shipping typically takes between 7-14 business days, depending on your location. You will receive a tracking number once your order is dispatched.</p>
+                        </details>
+                         <details class="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+                            <summary class="font-semibold cursor-pointer flex justify-between items-center">
+                                <span>What is your return policy?</span>
+                                <i data-lucide="chevron-down" class="faq-arrow transition-transform"></i>
+                            </summary>
+                            <p class="mt-4 text-gray-400">We offer a 14-day return policy for items that are unused and in their original packaging. Please contact our support team to initiate a return.</p>
+                        </details>
+                    </div>
+
+                    <!-- Online Admins Section -->
+                    <h3 class="text-2xl font-semibold mt-12 mb-6 text-blue-400">Online Admins</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <img src="https://placehold.co/40x40/3B82F6/ffffff?text=A" class="rounded-full" alt="Admin Alex">
+                                <span class="font-medium">Alex</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-green-400">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                         <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <img src="https://placehold.co/40x40/EC4899/ffffff?text=S" class="rounded-full" alt="Admin Sara">
+                                <span class="font-medium">Sara</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-gray-600"></span>
+                                </span>
+                                <span>Offline</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Support Form -->
+                <div class="text-left">
+                     <h3 class="text-2xl font-semibold mb-6">Send us a Message</h3>
+                     <form class="space-y-6 bg-gray-900/50 border border-gray-800 rounded-lg p-8">
+                        <div>
+                            <label for="support-name" class="block text-sm font-medium text-gray-300">Name</label>
+                            <input type="text" id="support-name" class="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="support-email" class="block text-sm font-medium text-gray-300">Email</label>
+                            <input type="email" id="support-email" class="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="support-message" class="block text-sm font-medium text-gray-300">Message</label>
+                            <textarea id="support-message" rows="5" class="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full gradient-button text-white font-bold py-3 px-4 rounded-md">Submit Ticket</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Stylist Modal -->
+    <div id="ai-stylist-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-lg border border-gray-700 p-8 relative">
+            <button id="close-ai-stylist-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-center mb-2">✨ AI Fashion Stylist</h3>
+            <p class="text-gray-400 text-center mb-6">Describe an occasion or style, and I'll find the perfect pieces for you.</p>
+            <textarea id="ai-stylist-input" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-md p-3 text-white focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="e.g., 'A classy outfit for a wedding in Italy' or 'Something casual for a weekend trip'"></textarea>
+            <button id="ai-stylist-submit" class="w-full gradient-button text-white font-bold py-3 px-4 rounded-md mt-4 flex items-center justify-center gap-2">
+                <span>Get Suggestions</span>
+                <div id="ai-spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // --- DATA ---
+        const products = [
+            { id: 1, name: 'Luxury Watch \'Elegance\'', price: 349.99, category: 'Accessories', img: 'https://placehold.co/600x600/3B82F6/ffffff?text=Watch+%27Elegance%27', description: 'A masterpiece of timekeeping, featuring a Swiss automatic movement, scratch-resistant sapphire crystal, and a stainless steel case. Water-resistant up to 100 meters.', sizes: ['One Size'] },
+            { id: 2, name: 'Designer Handbag \'Aura\'', price: 289.99, category: 'Accessories', img: 'https://placehold.co/600x600/EC4899/ffffff?text=Handbag+%27Aura%27', description: 'Handcrafted from the finest genuine calfskin leather, this bag combines timeless elegance with modern functionality. Features multiple compartments and a detachable shoulder strap.', sizes: ['One Size'] },
+            { id: 3, name: 'Sneakers \'Momentum\'', price: 179.99, category: 'Shoes', img: 'https://placehold.co/600x600/8B5CF6/ffffff?text=Sneakers+%27Momentum%27', description: 'The perfect blend of high-fashion and street style. These sneakers offer unparalleled comfort with a cushioned insole and a durable rubber outsole, designed for all-day wear.', sizes: ['39', '40', '41', '42', '43', '44'] },
+            { id: 4, name: 'Hoodie \'Urban\'', price: 129.99, category: 'Apparel', img: 'https://placehold.co/600x600/10B981/ffffff?text=Hoodie+%27Urban%27', description: 'Made from 100% premium heavyweight cotton, this hoodie is both soft and durable. It features a relaxed fit, a spacious kangaroo pocket, and an adjustable drawstring hood.', sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 5, name: 'Urban Tee', price: 89.99, category: 'Apparel', img: 'https://placehold.co/400x500/10B981/ffffff?text=T-Shirt', description: 'A classic tee with a modern twist. Made from ultra-soft pima cotton for a luxurious feel and a perfect fit that lasts. An essential wardrobe staple.', sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 6, name: 'Knit Sweater', price: 149.99, category: 'Apparel', img: 'https://placehold.co/400x500/F59E0B/ffffff?text=Sweater', description: 'Stay warm and stylish with this finely knit sweater. Crafted from a merino wool blend, it offers exceptional softness and breathability.', sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 7, name: 'Bomber Jacket', price: 219.99, category: 'Apparel', img: 'https://placehold.co/400x500/6366F1/ffffff?text=Jacket', description: 'A versatile and iconic piece. This bomber jacket is made from water-resistant nylon with a lightweight insulation, perfect for transitional weather.', sizes: ['M', 'L', 'XL', 'XXL'] },
+            { id: 8, name: 'Slim Fit Jeans', price: 169.99, category: 'Apparel', img: 'https://placehold.co/400x500/D946EF/ffffff?text=Jeans', description: 'Crafted from premium stretch denim for comfort and shape retention. These jeans feature a modern slim fit that is both stylish and comfortable.', sizes: ['30', '32', '34', '36'] },
+            { id: 9, name: 'Classic Polo', price: 99.99, category: 'Apparel', img: 'https://placehold.co/400x500/84CC16/ffffff?text=Polo', description: 'A timeless classic, reimagined. This polo shirt is made from breathable piqué cotton and features a tailored fit for a sharp, clean look.', sizes: ['S', 'M', 'L', 'XL'] }
+        ];
+
+        let currentCurrency = 'EUR';
+        const exchangeRates = {
+            EUR: 1,
+            USD: 1.08 // NOTE: In a real app, fetch this from an API
+        };
+
+        // --- PAGE NAVIGATION ---
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function showPage(pageId) {
+            pages.forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick').includes(`'${pageId}'`)) {
+                    link.classList.add('active');
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+
+        // --- MOBILE MENU ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // --- CART LOGIC ---
+        const cartButton = document.getElementById('cart-button');
+        const closeCartButton = document.getElementById('close-cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const cartModalContent = cartModal.querySelector('div');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+        const toastNotification = document.getElementById('toast-notification');
+        let cart = [];
+
+        cartButton.addEventListener('click', () => {
+            cartModal.classList.remove('hidden');
+            setTimeout(() => cartModalContent.classList.remove('translate-x-full'), 10);
+        });
+
+        function closeCart() {
+            cartModalContent.classList.add('translate-x-full');
+            setTimeout(() => cartModal.classList.add('hidden'), 300);
+        }
+        closeCartButton.addEventListener('click', closeCart);
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) closeCart();
+        });
+
+        function addToCart(product) {
+            const existingProduct = cart.find(item => item.id === product.id);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCart();
+            showToast();
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function updateCart() {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center">Your cart is empty.</p>`;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => {
+                    const itemTotalPrice = item.price * item.quantity;
+                    return `
+                    <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-700 last:border-b-0">
+                        <div class="flex items-center">
+                            <img src="${item.img.replace(/(\d+)x(\d+)/, '100x100')}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            <div>
+                                <h4 class="font-semibold">${item.name}</h4>
+                                <p class="text-gray-400 text-sm">${formatPrice(item.price, currentCurrency)} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                             <p class="font-semibold mr-4 glowing-price" data-currency-price="${itemTotalPrice}">${formatPrice(itemTotalPrice, currentCurrency)}</p>
+                             <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400">
+                                <i data-lucide="trash-2" class="w-5 h-5"></i>
+                             </button>
+                        </div>
+                    </div>
+                `}).join('');
+            }
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartTotal.dataset.currencyPrice = totalPrice;
+            updateAllPrices();
+            lucide.createIcons();
+        }
+        
+        function showToast() {
+            toastNotification.textContent = "Item added to cart!";
+            toastNotification.classList.remove('opacity-0', 'translate-y-10');
+            setTimeout(() => {
+                toastNotification.classList.add('opacity-0', 'translate-y-10');
+            }, 2000);
+        }
+
+        // --- PRODUCT DETAIL MODAL ---
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const modalContent = productDetailModal.querySelector('.modal-content');
+
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            modalContent.innerHTML = `
+                <div class="w-full md:w-1/2 h-64 md:h-auto">
+                    <img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="w-full md:w-1/2 p-8 flex flex-col overflow-y-auto">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-3xl font-bold">${product.name}</h2>
+                        <button onclick="closeProductModal()" class="text-gray-400 hover:text-white -mt-2 -mr-2">
+                            <i data-lucide="x" class="w-8 h-8"></i>
+                        </button>
+                    </div>
+                    <p class="text-3xl font-bold glowing-price mb-6" data-currency-price="${product.price}">${formatPrice(product.price, currentCurrency)}</p>
+                    <p class="text-gray-300 mb-6 flex-grow">${product.description}</p>
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3">SELECT SIZE</h3>
+                        <div class="flex flex-wrap gap-2" id="size-selector">
+                            ${product.sizes.map(size => `<button class="size-btn border border-gray-600 rounded-md py-2 px-4 hover:border-pink-500 hover:text-white transition-all">${size}</button>`).join('')}
+                        </div>
+                    </div>
+                    <button id="modal-add-to-cart" class="w-full gradient-button text-white font-bold py-3 rounded-lg mt-auto">Add to Cart</button>
+                </div>
+            `;
+            
+            lucide.createIcons();
+            productDetailModal.classList.remove('hidden');
+            setTimeout(() => productDetailModal.classList.add('open'), 10);
+
+            const sizeButtons = modalContent.querySelectorAll('.size-btn');
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    sizeButtons.forEach(btn => btn.classList.remove('bg-pink-600', 'border-pink-600'));
+                    button.classList.add('bg-pink-600', 'border-pink-600');
+                });
+            });
+
+            document.getElementById('modal-add-to-cart').onclick = () => {
+                addToCart(product);
+                closeProductModal();
+            };
+        }
+
+        function closeProductModal() {
+            productDetailModal.classList.remove('open');
+            setTimeout(() => {
+                productDetailModal.classList.add('hidden');
+                modalContent.innerHTML = '';
+            }, 300);
+        }
+        productDetailModal.addEventListener('click', (e) => {
+            if (e.target === productDetailModal) closeProductModal();
+        });
+
+        // --- FILTERING LOGIC ---
+        const productGrid = document.getElementById('product-grid');
+        const searchInput = document.getElementById('search-input');
+        const categoryFiltersContainer = document.getElementById('category-filters');
+        
+        let currentFilters = {
+            searchTerm: '',
+            category: null,
+            aiRecommendedIds: null
+        };
+
+        function renderProducts() {
+            let filteredProducts = [...products];
+
+            if (currentFilters.aiRecommendedIds) {
+                filteredProducts = filteredProducts.filter(p => currentFilters.aiRecommendedIds.includes(p.id));
+            } else {
+                if (currentFilters.searchTerm) {
+                    filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(currentFilters.searchTerm.toLowerCase()));
+                }
+                if (currentFilters.category) {
+                    filteredProducts = filteredProducts.filter(p => p.category === currentFilters.category);
+                }
+            }
+
+            productGrid.innerHTML = '';
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = `<p class="text-gray-400 col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 text-center">No products match the current filters.</p>`;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = `
+                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden group border border-gray-800 card-shadow transition-all cursor-pointer" onclick="openProductModal(${product.id})">
+                        <img src="${product.img}" alt="${product.name}" class="w-full h-64 object-cover transition-all group-hover:scale-105">
+                        <div class="p-6">
+                            <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
+                            <p class="text-gray-400 mb-4 truncate">${product.description}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold glowing-price" data-currency-price="${product.price}">${formatPrice(product.price, currentCurrency)}</span>
+                                <span class="text-sm text-gray-400">View Details</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+             lucide.createIcons();
+        }
+
+        function setupFilters() {
+            const allCategories = ['All', ...new Set(products.map(p => p.category))];
+            categoryFiltersContainer.innerHTML = allCategories.map(cat => 
+                `<button class="category-filter-btn border border-gray-700 rounded-full py-2 px-4 text-sm hover:border-pink-500 transition-all ${cat === 'All' ? 'active' : ''}" data-category="${cat}">${cat}</button>`
+            ).join('');
+            
+            searchInput.addEventListener('input', (e) => {
+                clearAiResults();
+                currentFilters.searchTerm = e.target.value;
+                renderProducts();
+            });
+
+            document.querySelectorAll('.category-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    clearAiResults();
+                    const category = btn.dataset.category;
+                    
+                    document.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    if (category === 'All') {
+                        currentFilters.category = null;
+                    } else {
+                        currentFilters.category = category;
+                    }
+                    renderProducts();
+                });
+            });
+        }
+
+        // --- SUPPORT MODAL LOGIC ---
+        const supportButton = document.getElementById('support-button');
+        const supportModal = document.getElementById('support-modal');
+        const closeSupportModalButton = document.getElementById('close-support-modal');
+
+        function openSupportModal() {
+            supportModal.classList.remove('hidden');
+            setTimeout(() => supportModal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSupportModal() {
+            supportModal.classList.add('opacity-0');
+            setTimeout(() => supportModal.classList.add('hidden'), 300);
+            document.body.style.overflow = '';
+        }
+
+        supportButton.addEventListener('click', openSupportModal);
+        closeSupportModalButton.addEventListener('click', closeSupportModal);
+        
+        // --- CURRENCY LOGIC ---
+        const currencySelector = document.getElementById('currency-selector');
+        
+        function formatPrice(priceInEur, currency) {
+            const rate = exchangeRates[currency];
+            const convertedPrice = priceInEur * rate;
+            return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency }).format(convertedPrice);
+        }
+
+        function updateAllPrices() {
+            document.querySelectorAll('[data-currency-price]').forEach(el => {
+                const basePrice = parseFloat(el.dataset.currencyPrice);
+                el.textContent = formatPrice(basePrice, currentCurrency);
+            });
+        }
+
+        currencySelector.addEventListener('change', (e) => {
+            currentCurrency = e.target.value;
+            localStorage.setItem('preferredCurrency', currentCurrency);
+            updateAllPrices();
+        });
+
+        function initCurrency() {
+            const savedCurrency = localStorage.getItem('preferredCurrency');
+            if (savedCurrency) {
+                currentCurrency = savedCurrency;
+                currencySelector.value = savedCurrency;
+            }
+            updateAllPrices();
+        }
+        
+        // --- AI STYLIST (GEMINI API) ---
+        const aiStylistModal = document.getElementById('ai-stylist-modal');
+        const aiStylistButton = document.getElementById('ai-stylist-button');
+        const closeAiStylistModalButton = document.getElementById('close-ai-stylist-modal');
+        const aiStylistSubmit = document.getElementById('ai-stylist-submit');
+        const aiStylistInput = document.getElementById('ai-stylist-input');
+        const aiSpinner = document.getElementById('ai-spinner');
+        const aiResultsBanner = document.getElementById('ai-results-banner');
+        const clearAiResultsButton = document.getElementById('clear-ai-results');
+
+        aiStylistButton.addEventListener('click', () => {
+            aiStylistModal.classList.remove('hidden');
+        });
+        closeAiStylistModalButton.addEventListener('click', () => {
+            aiStylistModal.classList.add('hidden');
+        });
+        aiStylistModal.addEventListener('click', (e) => {
+            if (e.target === aiStylistModal) aiStylistModal.classList.add('hidden');
+        });
+
+        function clearAiResults() {
+            currentFilters.aiRecommendedIds = null;
+            aiResultsBanner.classList.add('hidden');
+            renderProducts();
+        }
+        clearAiResultsButton.addEventListener('click', clearAiResults);
+
+        aiStylistSubmit.addEventListener('click', async () => {
+            const userPrompt = aiStylistInput.value.trim();
+            if (!userPrompt) return;
+
+            aiSpinner.classList.remove('hidden');
+            aiStylistSubmit.disabled = true;
+
+            const productListForAI = products.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name,
+                    category: p.category,
+                    description: p.description
+                };
+            });
+
+            const prompt = `You are an expert fashion stylist for a luxury replica store called 'Prestige Pieces'. A customer is looking for an outfit. Their request is: '${userPrompt}'. Based on their request, analyze the following list of available products and recommend the best items. Return your recommendations as a JSON array of product IDs. Only include IDs from the list provided. Available Products: ${JSON.stringify(productListForAI)}. Return ONLY a JSON array of product IDs like this: [1, 3, 4]`;
+            
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { 
+                contents: chatHistory,
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "ARRAY",
+                        items: { type: "NUMBER" }
+                    }
+                }
+            };
+            const apiKey = ""; // Provided by environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    const recommendedIds = JSON.parse(result.candidates[0].content.parts[0].text);
+                    currentFilters.aiRecommendedIds = recommendedIds;
+                    
+                    // Clear other filters
+                    currentFilters.searchTerm = '';
+                    currentFilters.category = null;
+                    searchInput.value = '';
+                    document.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('.category-filter-btn[data-category="All"]').classList.add('active');
+
+                    // Show results
+                    aiResultsBanner.classList.remove('hidden');
+                    document.getElementById('ai-results-text').textContent = `Showing AI recommendations for: "${userPrompt}"`;
+                    renderProducts();
+                    aiStylistModal.classList.add('hidden');
+                } else {
+                    console.error("AI response format error:", result);
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+            } finally {
+                aiSpinner.classList.add('hidden');
+                aiStylistSubmit.disabled = false;
+            }
+        });
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            initCurrency();
+            renderProducts();
+            setupFilters();
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+</html>
